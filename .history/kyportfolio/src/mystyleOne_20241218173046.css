@@ -1,0 +1,16 @@
+/* applies to the whole webpage*/
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+/* applies to the body of the webpage*/
+body{
+    background-color: aquamarine;
+}
+
+/* applies to the headings of the webpage*/
+h1{
+    color: black; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
