@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pounds to Kilograms Converter</title>
+</head>
+<body>
+
+    <h1>Pounds to Kilograms Converter</h1>
+
+    <label for="pounds">Weight (lbs):</label>
+    <input type="number" id="pounds" name="pounds"><br><br>
+
+    <button onclick="convert()">Convert</button>
+
+    <script>
+        function convert() {
+            const pounds = parseFloat(document.getElementById("pounds").value);
+
+            if (isNaN(pounds) || pounds < 0) {
+                alert("Please enter a valid weight in pounds.");
+                return;
+            }
+
+            const kilograms = pounds * 0.453592;
+            alert(pounds + " lbs is equal to " + kilograms.toFixed(2) + " kg");
+        }
+    </script>
+
+</body>
+</html>
