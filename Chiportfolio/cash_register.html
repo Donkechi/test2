@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cash Register</title>
+</head>
+<body>
+
+    <h1>Fruit Basket</h1>
+
+    <label for="fruitInput">Enter Fruit:</label>
+    <input type="text" id="fruitInput">
+    <button onclick="addItem()">Add to Basket</button><br><br>
+
+    <button onclick="showInvoice()">Show Invoice</button>
+
+    <div id="output"></div>
+
+    <script>
+        const fruitPrices = [
+            { name: "Apple", price: 10 },
+            { name: "Black Pineapple", price: 37 },
+            { name: "Mango", price: 8 },
+            { name: "Watermelon", price: 25 },
+            { name: "Banana", price: 7 },
+            { name: "Pear", price: 12 },
+            { name: "Orange", price: 3 }
+        ];
+
+        let basket = []; // Corrected: Initialize basket as an empty array
+
+        function calculateTotalCost() {
+            let totalCost = 0;
+            for (const item of basket) {
+                totalCost += item.price;
+            }
+            return totalCost;
+        }
+
+        function addToBasket(fruit) {
+            let item = fruitPrices.find(f => f.name.toLowerCase() === fruit.toLowerCase());
+            if (!item) {
+                console.log("Invalid fruit. Try again.");
+                return;
+            }
+            basket.push({ name: item.name, price: item.price });
+            console.log(`${item.name} added to basket.`);
+        }
+
+        function addItem() {
+            const fruitName = document.getElementById("fruitInput").value;
+            addToBasket(fruitName);
+            document.getElementById("fruitInput").value = "";
+        }
+
+        function showInvoice() {
+            const invoiceOutput = generateInvoiceHTML();
+            document.getElementById("output").innerHTML = invoiceOutput;
+        }
+
+        function generateInvoiceHTML() {
+            let invoiceHTML = "<h2>---invoice---</h2>";
+            if (basket.length === 0) {
+                invoiceHTML += "<p>Basket is empty.</p>";
+                return invoiceHTML;
+            }
+
+            invoiceHTML += "<ul>";
+            for (const item of basket) {
+                invoiceHTML += `<li>${item.name} - $${item.price}</li>`;
+            }
+            invoiceHTML += "</ul>";
+
+            const totalCost = calculateTotalCost();
+            invoiceHTML += `<p>--------------------</p>`;
+            invoiceHTML += `<p>Total items: ${basket.length}</p>`;
+            invoiceHTML += `<p>Total cost: $${totalCost.toFixed(2)}</p>`;
+            invoiceHTML += `<p>--------------------</p>`;
+            return invoiceHTML;
+        }
+    </script>
+
+</body>
+</html>
